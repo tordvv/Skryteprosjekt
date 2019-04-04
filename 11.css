@@ -1,0 +1,356 @@
+html {
+  margin: 0;
+}
+body {
+  background-color: #962503;
+  margin: 0;
+}
+nav {
+  background-color: #962503;
+
+  display: grid;
+  grid-template-columns: auto repeat(3, 1fr);
+  align-items: center;
+  margin-bottom: 10px;
+  min-width: 1200px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+nav a {
+  text-align: center;
+  color: white;
+
+}
+nav .hjem {
+  background-color: #000000;
+  font-weight: 800;
+  font-size: 32px;
+  text-decoration: none;
+  padding: 10px;
+  border-top: 3px solid #FFFFFF;
+  border-right: 3px solid #FFFFFF;
+  border-bottom: 3px solid #FFFFFF;
+  border-left: 3px solid #FFFFFF;
+    transition: 0.5s ease;
+}
+nav .hjem:hover {
+  background-color: #FFFFFF;
+  animation: colorchange 5s infinite;
+  -webkit-animation: colorchange 5s infinite;
+  font-weight: 800;
+  font-size: 32px;
+  color: #000000;
+  text-decoration: none;
+  padding: 10px;
+  border-top: 3px solid #000000;
+  border-right: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+  border-left: 3px solid #000000;
+  transition: 0.5s ease;
+}
+nav .link1 {
+  float: right;
+  font-size: 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
+    transition: 0.5s ease;
+}
+nav .link2 {
+  float: right;
+  font-size: 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
+    transition: 0.5s ease;
+}
+nav .link3 {
+  float: right;
+  font-size: 20px;
+  text-decoration: none;
+  margin-bottom: 10px;
+  margin-top: 10px;
+    transition: 0.5s ease;
+}
+nav .link1:hover {
+  color: black;
+  font: bold 15px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #EFE2CB;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 3px solid #CCCCCC;
+  border-right: 3px solid #333333;
+  border-bottom: 3px solid #333333;
+  border-left: 3px solid #CCCCCC;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: 0.5s ease;
+}
+nav .link2:hover {
+  color: black;
+  font: bold 15px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #CBEFCE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 3px solid #CCCCCC;
+  border-right: 3px solid #333333;
+  border-bottom: 3px solid #333333;
+  border-left: 3px solid #CCCCCC;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: 0.5s ease;
+}
+nav .link3:hover {
+  color: black;
+  font: bold 15px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #CCCBEF;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 3px solid #CCCCCC;
+  border-right: 3px solid #333333;
+  border-bottom: 3px solid #333333;
+  border-left: 3px solid #CCCCCC;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  transition: 0.5s ease;
+}
+main {
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-gap: 10px;
+  min-width: 1200px;
+}
+main h1, main p {
+  padding: 10px;
+}
+main a, main div {
+  color: 
+  text-decoration: none;
+}
+main img, main video {
+  width: 100%;
+}
+#div1 {
+  background-image: url(assets/bilder/drums.jpg);
+  background-position: center;
+  background-attachment: fixed;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+}
+#div1-1 {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  align-content: center;
+}
+#div1-1 h1 {
+  color: white;
+}
+#div1-1 div a img {
+  width: 100%;
+  height: auto;
+}
+#div1-1 div a {
+  text-decoration: none;
+}
+#div1-1 div a h2 {
+  text-align: center;
+  color: white;
+}
+#div2 {
+  max-width: 1500px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(13, 1fr);
+}
+#div2 div {
+  width: 80%;
+  margin: 0 auto;
+}
+#div2 div a {
+  text-decoration: none;
+}
+#div2 div a h3 {
+  color: white;
+}
+footer {
+  background-color: black;
+  margin-bottom: 15px;
+  top: 0;
+  width: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(12,1fr);
+  grid-gap: 10px;
+  min-width: 1000px;
+
+}
+footer #div-f2 h1, footer div p {
+  color: white;
+  font-size: 20px;
+}
+#div-f1 h1 {
+  color: white;
+  font-size: 30px;
+}
+#div-f1 {
+  margin-left: auto;
+  margin-right: 0;
+}
+#div-f2 {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.kol-1 {grid-column: span 1}
+.kol-2 {grid-column: span 2}
+.kol-3 {grid-column: span 3}
+.kol-4 {grid-column: span 4}
+.kol-5 {grid-column: span 5}
+.kol-6 {grid-column: span 6}
+.kol-7 {grid-column: span 7}
+.kol-8 {grid-column: span 8}
+.kol-9 {grid-column: span 9}
+.kol-10 {grid-column: span 10}
+.kol-11 {grid-column: span 11}
+.kol-12 {grid-column: span 12}
+.kol-13 {grid-column: span 13}
+
+ @keyframes colorchange
+    {
+      0% {background: white;}
+      4.34%   {background: black;}
+      8.69%  {background: white;}
+      13.04%  {background: black;}
+      17.39%  {background: white;}
+      21.73%  {background: black;}
+      26.08%  {background: black;}
+      30.43%  {background: white;}
+      34.78%  {background: white;}
+      39.13%  {background: black;}
+      43.47%  {background: white;}
+      47.82% {background: white;}
+      52.17% {background: black;}
+      56.52% {background: white;}
+      60.86% {background: white;}
+      65.21% {background: black;}
+      69.56% {background: black;}
+      73.91% {background: white;}
+      78.26% {background: black;}
+      82.60% {background: white;}
+      86.95% {background: black;}
+      91.30% {background: white;}
+      95.65% {background: black;}
+      99.9% {background: black;}
+      100% {background: white;}
+      }
+
+    @-webkit-keyframes colorchange 
+    {
+      0% {background: white;}
+      4.34%   {background: black;}
+      8.69%  {background: white;}
+      13.04%  {background: black;}
+      17.39%  {background: white;}
+      21.73%  {background: black;}
+      26.08%  {background: black;}
+      30.43%  {background: white;}
+      34.78%  {background: white;}
+      39.13%  {background: black;}
+      43.47%  {background: white;}
+      47.82% {background: white;}
+      52.17% {background: black;}
+      56.52% {background: white;}
+      60.86% {background: white;}
+      65.21% {background: black;}
+      69.56% {background: black;}
+      73.91% {background: white;}
+      78.26% {background: black;}
+      82.60% {background: white;}
+      86.95% {background: black;}
+      91.30% {background: white;}
+      95.65% {background: black;}
+      99.9% {background: black;}
+      100% {background: white;}
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (max-width: 1200px) {
+  nav {
+    min-width: 1200px
+  }
+  main {
+    min-width: 1200px;
+  }
+  #div1-1 {
+    max-width: 1200px;
+  }
+  #div2 {
+    max-width: 1200px;
+  }
+  footer {
+    min-width: 1200px;
+  }
+}
+
+
+
+
+
+
+
+@media (max-width: 1100px) {
+  nav {
+    min-width: 500px
+  }
+  main {
+    min-width: 900px;
+  }
+  #div1-1 {
+    max-width: 900px;
+  }
+  #div2 {
+    max-width: 800px;
+  }
+  footer {
+    min-width: 800px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

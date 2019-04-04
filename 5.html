@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="no">
+  <head>
+    <link rel="stylesheet" type="text/css" href="44.css">
+    <title>Fun.shid</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="index.html" class="hjem">Drums'n'sh.it</a>
+        <a href="2.html" class="link1">Litt Historie</a>
+        <a href="3.html" class="link2">Utstyr</a>
+        <a href="4.html" class="link3">Litt Moro</a>
+      </nav>
+    </header>
+    <div id="maindiv">
+      <h1 id="tittel">Litt Moro</h1>
+
+      <div class="kol-12" id="div-intr">
+        <p class="kol-12">
+          Om du har blitt meir interressert i trommer vil eg ta det som ein fantastisk moglegheit til å presentere nokon av dei alternativa som finnest ute der.
+          Til å byrje med har eg nokre kompani som lagar trommer som er veldig gode og poppulere.
+        </p>
+        
+      </div>
+      <div class="kol-12" id="div1"> <!-- Table vil ikkje fungere i koden min. Har ikkje tid til å fine det ut. Lagar noko som liknar -->
+
+        <div class="kol-2" id="div1-1"><h2>Pearl Drums</h2></div>
+        <div class="kol-4" id="div1-2">
+          <a href="http://www.pearleurope.com/home/"><img src="assets/bilder/pearl-logo.jpg"></a>
+        </div>
+        <div class="kol-2" id="div1-1"><h2>Alesis</h2></div>
+        <div class="kol-4" id="div1-2">
+          <a href="https://www.alesis.com/"><img src="assets/bilder/alesis-logo.jpg"></a>
+        </div>
+        <div class="kol-2" id="div1-1"><h2>Roland</h2></div>
+        <div class="kol-4" id="div1-2">
+          <a href="https://www.roland.com/global/categories/drums_percussion/"><img src="assets/bilder/roland-logo.jpg"></a>
+        </div>
+        <div class="kol-2" id="div1-1"><h2>Ludwig Drums</h2></div>
+        <div class="kol-4" id="div1-2">
+          <a href="https://www.ludwig-drums.com/"><img src="assets/bilder/ludwig-logo.jpg"></a>
+        </div>
+      </div>
+      <br><br>
+      <div class="kol-12" id="div2">
+        <form id="skjema" action="takk.html" >
+
+          <p id="form-p">Likte du nettsida mi?</p>
+          <br><br>
+          <input type="text" id="inpTittel" placeholder="Kva heiter du?" required>
+          <p>Legg til eit bilete av deg eller trommesettet ditt</p>
+          <input type="file" id="inpBilde" required>
+          <select id="inpGrade" name="select" required>
+            <option value="Ikkje vurdert">Korleis liker du nettsida mi?</option>
+            <option value="Likte ikkje">Likte ikkje</option>
+            <option value="Likte lite">Likte lite</option>
+            <option value="Likegyldig">Likegjyldig</option>
+            <option value="Likte litt">Likte litt</option>
+            <option value="Likte veldig">Likte veldig</option>
+          </select>
+          <br><br>
+          <textarea id="inpTekst" placeholder="Har du noko å legge til?"></textarea>
+          <br><br>
+          <input id="submit" type="submit" value="Submit">
+        </form>
+
+      </div>
+    </div>
+    <br><br>
+    <p>Søk etter Innlegg</p>
+    <input id="sokefelt" type="text"> <button onclick="sok()">Søk</button>
+    <br><br>
+    <main></main>
+    <div id="overlay">
+      <img src="assets/gifs/loading.gif">
+    </div>
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      let config = {
+        apiKey: "AIzaSyBvL0gWQDouEfnK928aFBvJK43l4jnXdlo",
+        authDomain: "test-1-48b3f.firebaseapp.com",
+        databaseURL: "https://test-1-48b3f.firebaseio.com",
+        projectId: "test-1-48b3f",
+        storageBucket: "test-1-48b3f.appspot.com",
+        messagingSenderId: "689501760110"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script>
+        const inpBilde = document.querySelector("#inpBilde");
+  const inpTekst = document.querySelector("#inpTekst");
+  const inpTittel = document.querySelector("#inpTittel")
+  const inpGrade = document.querySelector("#inpGrade")
+  const skjema = document.querySelector("#skjema");
+  const overlay = document.querySelector("#overlay");
+  
+  const main = document.querySelector("main");
+  
+  // Firebase
+  const db = firebase.database();
+  const storage = firebase.storage();
+  
+  const bloggen = db.ref("bloggen");
+  
+  
+  // Funksjon som lagrer bilde i databasen
+  function lagreBilde(evt) {
+  evt.preventDefault();
+  
+  // Viser overlay
+  overlay.style.display = "flex";
+  
+  // Bilde som skal lastes opp
+  const bilde = inpBilde.files[0];
+  
+  // Hvor skal vi lagre bildet
+  const lagringsplass = storage.ref("bloggbilder/" + ( +new Date() ) + bilde.name);
+  
+  // Vi laster opp bildet til storage
+  lagringsplass.put(bilde)
+  .then( bilde => bilde.ref.getDownloadURL() )
+  .then( url => {
+  bloggen.push({
+  url: url,
+  tekst: inpTekst.value,
+  tittel: inpTittel.value,
+  grade: inpGrade.value
+  });
+  skjema.reset();
+  overlay.style.display = "none";
+  } );
+  
+  }
+  
+  function visBilde(snap) {
+  const key = snap.key;
+  const data = snap.val();
+  
+  main.innerHTML = `
+  <article>
+  <h2>${data.tittel}</h2>
+  <img src="${data.url}">
+  <p>Vurdering *${data.grade}*</p>
+  <br>
+  <p>${data.tekst}</p>
+  </article>
+  ` + main.innerHTML;
+  }
+
+
+  
+         
+  // Event Listeners
+  skjema.addEventListener("submit", lagreBilde);
+  bloggen.on("child_added", visBilde);
+
+    </script>
+    <br>
+    <br>
+    
+    <br>
+    <br>
+    <br>
+
+    <footer>
+      <div class="kol-6" id="div-f1">
+        <h1>Author:</h1>
+      </div>
+      <div class="kol-6" id="div-f2">
+        <br>
+        <h1>Tord vikestad</h1>
+        <p>tordvv@gmail.com</p>
+      </div>
+      <br>
+    </footer>
+  </body>
+</html>
