@@ -7,7 +7,7 @@
   <body>
     <header>
       <nav>
-        <a href="index.html" class="hjem">Drums'n'sh.it</a>
+        <a href="1.html" class="hjem">Drums'n'sh.it</a>
         <a href="2.html" class="link1">Litt Historie</a>
         <a href="3.html" class="link2">Utstyr</a>
         <a href="4.html" class="link3">Litt Moro</a>
@@ -68,8 +68,8 @@
       </div>
     </div>
     <br><br>
-    <p>Søk etter Innlegg</p>
-    <input id="sokefelt" type="text"> <button onclick="sok()">Søk</button>
+    <p id="soketter">Søk etter Innlegg</p>
+    <input id="sokefelt" type="text" placeholder="Ver spesifikk på store og små bokstavar."> <button id="sokeknapp" onclick="sok()">Søk</button>
     <br><br>
     <main></main>
     <div id="overlay">
@@ -95,72 +95,90 @@
     </script>
 
     <script>
-        const inpBilde = document.querySelector("#inpBilde");
-  const inpTekst = document.querySelector("#inpTekst");
-  const inpTittel = document.querySelector("#inpTittel")
-  const inpGrade = document.querySelector("#inpGrade")
-  const skjema = document.querySelector("#skjema");
-  const overlay = document.querySelector("#overlay");
+      const inpBilde = document.querySelector("#inpBilde");
+      const inpTekst = document.querySelector("#inpTekst");
+      const inpTittel = document.querySelector("#inpTittel")
+      const inpGrade = document.querySelector("#inpGrade")
+      const skjema = document.querySelector("#skjema");
+      const overlay = document.querySelector("#overlay");
+      const main = document.querySelector("main");
+
+      const sokefelt = document.getElementById("sokefelt");
+      var soketekst ="";
   
-  const main = document.querySelector("main");
+        // Firebase
+      const db = firebase.database();
+      const storage = firebase.storage();
+
+      const bloggen = db.ref("bloggen");
+
+
+            //sokefelt.oninput = sok;
+      function sok () {
+        soketekst=sokefelt.value;
+  		visUtvalg();
+		    }
   
-  // Firebase
-  const db = firebase.database();
-  const storage = firebase.storage();
+        // Funksjon som lagrer bilde i databasen
+      function lagreBilde(evt) {
+      evt.preventDefault();
   
-  const bloggen = db.ref("bloggen");
+        // Viser overlay
+      overlay.style.display = "flex";
   
+        // Bilde som skal lastes opp
+      const bilde = inpBilde.files[0];
   
-  // Funksjon som lagrer bilde i databasen
-  function lagreBilde(evt) {
-  evt.preventDefault();
+        // Hvor skal vi lagre bildet
+      const lagringsplass = storage.ref("bloggbilder/" + ( +new Date() ) + bilde.name);
   
-  // Viser overlay
-  overlay.style.display = "flex";
+        // Vi laster opp bildet til storage
+      lagringsplass.put(bilde)
+      .then( bilde => bilde.ref.getDownloadURL() )
+      .then( url => {
+      bloggen.push({
+      url: url,
+      tekst: inpTekst.value,
+      tittel: inpTittel.value,
+      grade: inpGrade.value
+      });
+      skjema.reset();
+      overlay.style.display = "none";
+      } );
   
-  // Bilde som skal lastes opp
-  const bilde = inpBilde.files[0];
+      }
   
-  // Hvor skal vi lagre bildet
-  const lagringsplass = storage.ref("bloggbilder/" + ( +new Date() ) + bilde.name);
+      function visUtvalg() {
+       main.innerHTML = " ";
+       bloggen
+        	.orderByChild("tittel")
+          .startAt(soketekst)
+  	      .endAt(soketekst + '\uf8ff')
+  	      .on("child_added", visBilde);
+      }
+
+      function visBilde(snap) {
+      const key = snap.key;
+      const data = snap.val();
   
-  // Vi laster opp bildet til storage
-  lagringsplass.put(bilde)
-  .then( bilde => bilde.ref.getDownloadURL() )
-  .then( url => {
-  bloggen.push({
-  url: url,
-  tekst: inpTekst.value,
-  tittel: inpTittel.value,
-  grade: inpGrade.value
-  });
-  skjema.reset();
-  overlay.style.display = "none";
-  } );
-  
-  }
-  
-  function visBilde(snap) {
-  const key = snap.key;
-  const data = snap.val();
-  
-  main.innerHTML = `
-  <article>
-  <h2>${data.tittel}</h2>
-  <img src="${data.url}">
-  <p>Vurdering *${data.grade}*</p>
-  <br>
-  <p>${data.tekst}</p>
-  </article>
-  ` + main.innerHTML;
-  }
+      main.innerHTML = `
+      <article>
+      <h2>${data.tittel}</h2>
+      <img src="${data.url}">
+      <p>Vurdering *${data.grade}*</p>
+      <br>
+      <p>${data.tekst}</p>
+      </article>
+      ` + main.innerHTML;
+      }
 
 
   
          
-  // Event Listeners
-  skjema.addEventListener("submit", lagreBilde);
-  bloggen.on("child_added", visBilde);
+        // Event Listeners
+      sokefelt.addEventListener("sokeknapp", visUtvalg);
+      skjema.addEventListener("submit", lagreBilde);
+      bloggen.on("child_added", visBilde);
 
     </script>
     <br>
@@ -183,7 +201,6 @@
     </footer>
   </body>
 </html>
-
 
 
 

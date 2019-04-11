@@ -206,6 +206,14 @@ select {
   margin-top: 0px;
   transition: 0.5s ease;
 }
+#soketter {
+  margin-left: 10%
+}
+#sokefelt {
+  margin-left: 7%;
+  min-width: 250px;
+}
+
 footer {
   background-color: black;
   margin-bottom: 15px;
