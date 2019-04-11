@@ -241,7 +241,7 @@ main {
   main article {
   display: grid;
   grid-auto-flow: row;
-  background-color: orange;
+  background-color: #4a75ba;
   cursor: pointer;
   }
   
