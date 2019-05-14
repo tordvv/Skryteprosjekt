@@ -12,7 +12,7 @@ nav {
   grid-template-columns: auto repeat(3, 1fr);
   align-items: center;
   margin-bottom: 10px;
-  min-width: 1200px;
+  min-width: 1100px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -126,7 +126,7 @@ main {
   display: grid;
   grid-template-columns: repeat(12,1fr);
   grid-gap: 10px;
-  min-width: 1200px;
+  min-width: 1100px;
 }
 main h1, main p {
   padding: 10px;
@@ -300,24 +300,6 @@ footer #div-f2 h1, footer div p {
 
 
 
-@media (max-width: 1200px) {
-  nav {
-    min-width: 1200px
-  }
-  main {
-    min-width: 1200px;
-  }
-  #div1-1 {
-    max-width: 1200px;
-  }
-  #div2 {
-    max-width: 1200px;
-  }
-  footer {
-    min-width: 1200px;
-  }
-}
-
 
 
 
@@ -326,7 +308,7 @@ footer #div-f2 h1, footer div p {
 
 @media (max-width: 1100px) {
   nav {
-    min-width: 500px
+    min-width: 520px;
   }
   main {
     min-width: 900px;
@@ -341,16 +323,3 @@ footer #div-f2 h1, footer div p {
     min-width: 800px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

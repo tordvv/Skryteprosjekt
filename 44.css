@@ -339,7 +339,7 @@ main {
 
 @media (max-width: 1000px) {
   nav {
-  min-width: 500px;
+  min-width: 520px;
 }
 #maindiv{
   min-width: 900px;
