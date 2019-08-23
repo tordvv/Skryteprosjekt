@@ -3,27 +3,67 @@
   <head>
     <meta charset="UTF-8">
     <title>Logg inn</title>
+    <style type="text/css">
+      @keyframes spin {
+        to{
+          transform: translateX(1735px) rotate(15turn);
+        }
+      }
+      #button.animation {
+        animation: spin 5s ease-in-out forwards;
+      }
+
+      #button.static {
+        font-size: 20px;
+      }
+
+      @media ()
+    </style>
   </head>
   
   <body>
       <form name="myForm">
-      <p>Denne nettsida har avgrensa tillgang.</p>
-      <p>Om du vill ha tillgang til nettsida så skriv inn, eller spør om passord.</p><br>
-      <input type="password" name="pwd" maxlength="10">
-      <input type="button" onclick="sjekkPassord()" value="Logg inn">
+      <p>Denne nettsida har avgrensa tilgang.</p>
+      <p>Om du vill ha tilgang til nettsida så skriv inn, eller spør om passord.</p><br>
+      <p></p>
+      <input type="password" name="pwd" maxlength="10" id="pswd">
+      <input type="button" onclick="sjekkPassord()" onmouseover="snurr()" value="Logg inn" id="button">
     </form> 
+
+    <input type="button" name="rst" value="prøv på nytt" onclick="window.location.reload()">
     
-    <script>
-    function sjekkPassord() {
-      var x = document.forms["myForm"]["pwd"].value;
-      if (x == "ItErKjekt") {
+    <script>     
+
+    //let x = document.form["myForm"]["pswd"].value;
+    
+
+    
+    function sjekkPassord(x) {
+
+      var xx = document.getElementById("pswd").value;
+      
+      if (xx == "aa") {
+        
         window.location.assign("1.html");
       }
-      else if (x == ""){
+      else if (xx == ""){
         alert("Please type your password");  
       }
       else{
         alert("Incorrect password, try again");
+      }
+    }
+
+    function snurr(x) {
+
+      var xx = document.getElementById("pswd").value;
+        
+      if (xx == "aa") {
+        document.getElementById('button').classList.add("static")
+      }
+      
+      else{
+        document.getElementById('button').classList.add("animation");
       }
     }
     </script> 
